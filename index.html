@@ -1,1 +1,854 @@
+```html
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bangla Tools Ultra</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:Arial,sans-serif;
+background:#070707;
+color:#fff;
+min-height:100vh;
+}
+.hidden{display:none!important}
+
+.auth{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+background:
+radial-gradient(circle at top,#3b0b0b,#070707 55%);
+}
+
+.box{
+width:100%;
+max-width:430px;
+background:#111;
+border:1px solid #351515;
+border-radius:25px;
+padding:30px;
+box-shadow:0 20px 70px #000;
+}
+
+.logo{
+text-align:center;
+font-size:28px;
+font-weight:900;
+margin-bottom:8px;
+}
+.logo span{color:#ff2525}
+
+.sub{
+text-align:center;
+color:#999;
+margin-bottom:25px;
+}
+
+input,textarea,select{
+width:100%;
+background:#080808;
+border:1px solid #333;
+color:#fff;
+padding:14px;
+border-radius:12px;
+outline:none;
+margin-bottom:13px;
+}
+
+textarea{
+min-height:220px;
+resize:vertical;
+line-height:1.7;
+}
+
+input:focus,textarea:focus,select:focus{
+border-color:#ff2929;
+}
+
+button{
+cursor:pointer;
+}
+
+.mainbtn{
+width:100%;
+border:0;
+padding:15px;
+border-radius:13px;
+background:linear-gradient(135deg,#ff2828,#980000);
+color:#fff;
+font-weight:bold;
+font-size:16px;
+}
+
+.switch{
+text-align:center;
+color:#999;
+margin-top:18px;
+}
+.switch span{
+color:#ff2929;
+font-weight:bold;
+cursor:pointer;
+}
+
+.msg{
+color:#ff6565;
+text-align:center;
+margin-bottom:12px;
+}
+
+/* APP */
+
+header{
+position:sticky;
+top:0;
+z-index:10;
+background:rgba(8,8,8,.92);
+backdrop-filter:blur(15px);
+border-bottom:1px solid #222;
+}
+
+.nav{
+max-width:1200px;
+margin:auto;
+padding:15px 20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.brand{
+font-size:21px;
+font-weight:900;
+}
+.brand span{color:#ff2525}
+
+.logout{
+background:#151515;
+border:1px solid #333;
+color:#fff;
+padding:9px 14px;
+border-radius:10px;
+}
+
+main{
+max-width:1200px;
+margin:auto;
+padding:25px 20px;
+}
+
+.hero{
+background:linear-gradient(145deg,#190808,#0d0d0d);
+border:1px solid #341313;
+border-radius:24px;
+padding:30px;
+margin-bottom:20px;
+}
+
+.hero h1{
+font-size:40px;
+margin-bottom:10px;
+}
+.hero h1 span{color:#ff2525}
+.hero p{
+color:#aaa;
+line-height:1.7;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 300px;
+gap:20px;
+}
+
+.card{
+background:#101010;
+border:1px solid #292929;
+border-radius:22px;
+padding:22px;
+}
+
+.card h2{
+margin-bottom:18px;
+}
+
+.controls{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.control{
+background:#080808;
+border:1px solid #292929;
+border-radius:13px;
+padding:12px;
+}
+
+.control label{
+display:block;
+color:#888;
+font-size:13px;
+margin-bottom:7px;
+}
+
+.control input,
+.control select{
+margin:0;
+}
+
+.generate{
+width:100%;
+padding:16px;
+margin-top:15px;
+border:0;
+border-radius:14px;
+background:linear-gradient(135deg,#ff2525,#990000);
+color:#fff;
+font-weight:bold;
+font-size:16px;
+}
+
+.status{
+margin-top:15px;
+padding:13px;
+background:#171717;
+border-radius:12px;
+color:#aaa;
+}
+
+audio{
+width:100%;
+margin-top:15px;
+}
+
+.download{
+display:block;
+text-align:center;
+text-decoration:none;
+color:#fff;
+background:#181818;
+border:1px solid #333;
+padding:13px;
+border-radius:12px;
+margin-top:10px;
+}
+
+.info{
+color:#aaa;
+line-height:1.9;
+}
+
+.info strong{color:#fff}
+
+@media(max-width:800px){
+.grid{grid-template-columns:1fr}
+.controls{grid-template-columns:1fr}
+.hero h1{font-size:30px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<section id="auth" class="auth">
+
+<div class="box">
+
+<div class="logo">
+Bangla <span>Tools</span> Ultra
+</div>
+
+<div class="sub">
+Premium Voice Studio
+</div>
+
+<div id="msg" class="msg"></div>
+
+<div id="login">
+
+<input id="loginEmail"
+type="email"
+placeholder="📧 Email">
+
+<input id="loginPassword"
+type="password"
+placeholder="🔐 Password">
+
+<button class="mainbtn"
+onclick="login()">
+LOGIN
+</button>
+
+<div class="switch">
+Account নেই?
+<span onclick="registerMode()">Create Account</span>
+</div>
+
+</div>
+
+
+<div id="register" class="hidden">
+
+<input id="regName"
+placeholder="👤 Your Name">
+
+<input id="regEmail"
+type="email"
+placeholder="📧 Email">
+
+<input id="regPassword"
+type="password"
+placeholder="🔐 Password">
+
+<button class="mainbtn"
+onclick="createAccount()">
+CREATE ACCOUNT
+</button>
+
+<div class="switch">
+আগে থেকেই Account আছে?
+<span onclick="loginMode()">Login</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- APP -->
+
+<section id="app" class="hidden">
+
+<header>
+
+<div class="nav">
+
+<div class="brand">
+Bangla <span>Tools</span> Ultra
+</div>
+
+<div>
+<span id="username"></span>
+
+<button class="logout"
+onclick="logout()">
+Logout
+</button>
+</div>
+
+</div>
+
+</header>
+
+
+<main>
+
+<div class="hero">
+
+<h1>
+AI Voice <span>Studio</span>
+</h1>
+
+<p>
+Text লিখুন → Voice নির্বাচন করুন →
+Generate করুন।
+</p>
+
+</div>
+
+
+<div class="grid">
+
+<div class="card">
+
+<h2>🎙️ Text To Speech</h2>
+
+<textarea
+id="text"
+maxlength="5000"
+placeholder="এখানে আপনার Text লিখুন..."></textarea>
+
+
+<div class="controls">
+
+<div class="control">
+
+<label>🌐 Language</label>
+
+<select id="language">
+
+<option value="bn-BD">
+🇧🇩 Bengali
+</option>
+
+<option value="en-US">
+🇺🇸 English
+</option>
+
+<option value="hi-IN">
+🇮🇳 Hindi
+</option>
+
+<option value="es-ES">
+🇪🇸 Spanish
+</option>
+
+<option value="fr-FR">
+🇫🇷 French
+</option>
+
+<option value="de-DE">
+🇩🇪 German
+</option>
+
+<option value="ja-JP">
+🇯🇵 Japanese
+</option>
+
+<option value="ko-KR">
+🇰🇷 Korean
+</option>
+
+</select>
+
+</div>
+
+
+<div class="control">
+
+<label>🎚️ Speed</label>
+
+<input
+id="speed"
+type="number"
+value="1"
+min=".5"
+max="2"
+step=".1">
+
+</div>
+
+</div>
+
+
+<button
+id="generate"
+class="generate"
+onclick="generateVoice()">
+
+🔥 Generate Voice
+
+</button>
+
+
+<div id="status"
+class="status">
+
+Ready — Voice generate করার জন্য প্রস্তুত।
+
+</div>
+
+
+<audio
+id="audio"
+controls
+class="hidden">
+</audio>
+
+
+<a
+id="download"
+class="download hidden"
+download="bangla-tools-ultra-voice.wav">
+
+⬇️ Download Voice
+
+</a>
+
+</div>
+
+
+<div class="card">
+
+<h2>⚡ Studio</h2>
+
+<div class="info">
+
+<p>
+<strong>Platform:</strong>
+Bangla Tools Ultra
+</p>
+
+<p>
+<strong>Voice:</strong>
+Browser Voice Engine
+</p>
+
+<p>
+<strong>Mode:</strong>
+Client Side
+</p>
+
+<p>
+<strong>Login:</strong>
+Enabled
+</p>
+
+<br>
+
+<p>
+এই version কোনো API key
+চায় না।
+</p>
+
+<br>
+
+<p>
+Developed by
+<strong>MD RAFIM HOSSEN</strong>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+</section>
+
+
+<script>
+
+/* =====================
+   LOGIN SYSTEM
+===================== */
+
+function registerMode(){
+
+document.getElementById("login")
+.classList.add("hidden");
+
+document.getElementById("register")
+.classList.remove("hidden");
+
+document.getElementById("msg").textContent="";
+
+}
+
+
+function loginMode(){
+
+document.getElementById("register")
+.classList.add("hidden");
+
+document.getElementById("login")
+.classList.remove("hidden");
+
+document.getElementById("msg").textContent="";
+
+}
+
+
+function createAccount(){
+
+const name=
+document.getElementById("regName").value.trim();
+
+const email=
+document.getElementById("regEmail").value.trim();
+
+const password=
+document.getElementById("regPassword").value;
+
+if(!name||!email||!password){
+
+showMsg("সব তথ্য পূরণ করুন");
+return;
+
+}
+
+if(password.length<6){
+
+showMsg("Password কমপক্ষে ৬ অক্ষরের দিন");
+return;
+
+}
+
+const users=
+JSON.parse(localStorage.getItem("BTU_USERS")||"[]");
+
+if(users.some(x=>x.email===email)){
+
+showMsg("এই Email দিয়ে Account আছে");
+return;
+
+}
+
+users.push({
+name,
+email,
+password
+});
+
+localStorage.setItem(
+"BTU_USERS",
+JSON.stringify(users)
+);
+
+localStorage.setItem(
+"BTU_LOGIN",
+email
+);
+
+openApp({
+name,
+email
+});
+
+}
+
+
+function login(){
+
+const email=
+document.getElementById("loginEmail").value.trim();
+
+const password=
+document.getElementById("loginPassword").value;
+
+const users=
+JSON.parse(localStorage.getItem("BTU_USERS")||"[]");
+
+const user=
+users.find(
+x=>x.email===email &&
+x.password===password
+);
+
+if(!user){
+
+showMsg("Email অথবা Password ভুল");
+return;
+
+}
+
+localStorage.setItem(
+"BTU_LOGIN",
+email
+);
+
+openApp(user);
+
+}
+
+
+function showMsg(text){
+
+document.getElementById("msg")
+.textContent=text;
+
+}
+
+
+function openApp(user){
+
+document.getElementById("auth")
+.classList.add("hidden");
+
+document.getElementById("app")
+.classList.remove("hidden");
+
+document.getElementById("username")
+.textContent="👤 "+user.name;
+
+}
+
+
+function logout(){
+
+localStorage.removeItem("BTU_LOGIN");
+
+location.reload();
+
+}
+
+
+/* AUTO LOGIN */
+
+function checkLogin(){
+
+const email=
+localStorage.getItem("BTU_LOGIN");
+
+if(!email)return;
+
+const users=
+JSON.parse(localStorage.getItem("BTU_USERS")||"[]");
+
+const user=
+users.find(x=>x.email===email);
+
+if(user){
+
+openApp(user);
+
+}
+
+}
+
+checkLogin();
+
+
+/* =====================
+   VOICE SYSTEM
+===================== */
+
+let voices=[];
+
+
+function loadVoices(){
+
+voices=
+window.speechSynthesis.getVoices();
+
+}
+
+
+speechSynthesis.onvoiceschanged=
+loadVoices;
+
+loadVoices();
+
+
+function generateVoice(){
+
+const text=
+document.getElementById("text")
+.value.trim();
+
+const language=
+document.getElementById("language")
+.value;
+
+const speed=
+Number(
+document.getElementById("speed").value
+);
+
+const status=
+document.getElementById("status");
+
+if(!text){
+
+status.textContent=
+"❌ আগে Text লিখুন";
+
+return;
+
+}
+
+if(!window.speechSynthesis){
+
+status.textContent=
+"❌ এই Browser Voice Support করে না";
+
+return;
+
+}
+
+
+speechSynthesis.cancel();
+
+
+const utterance=
+new SpeechSynthesisUtterance(text);
+
+utterance.lang=language;
+
+utterance.rate=speed;
+
+const matching=
+voices.find(
+voice=>
+voice.lang.toLowerCase()
+.startsWith(
+language.split("-")[0].toLowerCase()
+)
+);
+
+if(matching){
+
+utterance.voice=matching;
+
+}
+
+
+status.textContent=
+"⏳ 10% — Preparing...";
+
+
+setTimeout(()=>{
+
+status.textContent=
+"⚙️ 40% — Generating...";
+
+},300);
+
+
+setTimeout(()=>{
+
+status.textContent=
+"🎙️ 70% — Speaking...";
+
+},700);
+
+
+utterance.onstart=()=>{
+
+status.textContent=
+"🎙️ 70% — Voice Playing...";
+
+};
+
+
+utterance.onend=()=>{
+
+status.textContent=
+"✅ 100% — SUCCESS";
+
+};
+
+
+utterance.onerror=()=>{
+
+status.textContent=
+"❌ ERROR — Voice failed";
+
+};
+
+
+speechSynthesis.speak(
+utterance
+);
+
+}
+
+</script>
+
+</body>
+</html>
+```
 
